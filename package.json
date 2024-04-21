@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:I7axa666/ahj-course-work-back.git",
+  "license": "MIT",
+  "scripts": {
+    "watch": "forever --watchIgnore src/public server.js",
+    "lint": "eslint --fix ."
+  },
+  "devDependencies": {
+    "@koa/cors": "^5.0.0",
+    "@types/file-saver": "^2.0.7",
+    "forever": "^0.14.2",
+    "koa": "^2.15.2",
+    "koa-body": "^6.0.1",
+    "koa-static": "^5.0.0",
+    "uuid": "^9.0.1"
+  },
+  "dependencies": {
+    "eslint": "7.32.0",
+    "file-saver": "^2.0.5",
+    "ws": "^8.16.0"
+  }
+}
