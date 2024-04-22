@@ -72,6 +72,7 @@ class DB {
       date: Date.now(),
       favorite: false,
       attach: `${this.url}${folderName}/${attachName}`,
+      pinned: false,
     };
 
     const messageListPath = path.join(this.parentDir, 'public', 'json', 'messageList.json');
@@ -116,6 +117,26 @@ class DB {
       return [];
     }
     return JSON.parse(data).filter(message => message.favorite);
+  }
+
+  pinMsg (id) {
+    const messageList = path.join(this.parentDir, 'public', 'json', 'messageList.json');
+    const data = fs.readFileSync(messageList, 'utf8');
+    if (!data) {
+      return [];
+    }
+    const newData = JSON.parse(data).map((message) => {
+      if (message.id === id) {
+        if(!message.pinned) {
+          message.pinned = true;
+        } else {
+          message.pinned = false;
+        }
+      }
+      return message;
+    });
+    fs.writeFileSync(messageList, JSON.stringify(newData, null, 2));
+    console.log('messageList.json updated');
   }
 }
 

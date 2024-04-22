@@ -23,15 +23,20 @@ app.use(serve(__dirname + '/src/public/'));
 app.use(async (ctx) => {
   try {
     if (ctx.method === 'GET') {
-      console.log('get')
+      // console.log('get')
       ctx.body = JSON.stringify(db.getFavorite());
       ctx.status = 200;
     } else if (ctx.method === 'PATCH') {
-      console.log(ctx.request.body);
+      // console.log(ctx.request.body);
       db.changeFavorite(ctx.request.body.id);
       ctx.status = 201;
       ctx.body = 'Changed';
 
+    } else if (ctx.method === 'POST') {
+      db.pinMsg(ctx.request.body.id);
+      ctx.status = 201;
+      ctx.body = 'Pinned';
+    
     } else {
       ctx.throw(405, 'Method Not Allowed');
     }
